@@ -1,4 +1,4 @@
-# cards-catalog-akkodis
+# cars-catalog-akkodis
 
-https://cards-catalog-akkodis.netlify.app/
+https://cars-catalog-akkodis.netlify.app/
 
