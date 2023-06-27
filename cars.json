@@ -1,0 +1,7 @@
+{
+       "coches": [
+		{ "id": 1, "nombre": "Ateca", "marca": "SEAT"},
+		{ "id": 2, "nombre": "Formentor", "marca": "Cupra"},
+		{ "id": 3, "nombre": "Arteon", "marca": "VW"}
+	]
+}
