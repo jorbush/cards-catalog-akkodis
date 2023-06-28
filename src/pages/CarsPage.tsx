@@ -78,7 +78,7 @@ const CarsPage = () => {
                   )
                 }
                 likeButtonEnabled
-                liked
+                liked={false}
                 onLiked={() => {}}
                 deleteButtonEnabled
                 onDeleted={() => {}}
