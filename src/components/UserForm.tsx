@@ -27,7 +27,8 @@ const UserForm: React.FC<UserFormProps> = ({
             coches_favoritos: favoriteCars,
         };
         onAddUser(newUser);
-        clearInputs()
+        onToggleForm();
+        clearInputs();
     };
 
     const clearInputs = () => {
@@ -70,7 +71,7 @@ const UserForm: React.FC<UserFormProps> = ({
                         }
                     />
                 </div>
-                <button type="submit" onClick={onToggleForm}>Add User</button>
+                <button type="submit">Add User</button>
             </form>
         </div>
     );
