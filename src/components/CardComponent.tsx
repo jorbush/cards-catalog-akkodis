@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
+import { AiFillHeart, AiOutlineHeart, AiFillDelete, AiOutlineDelete } from "react-icons/ai";
 
 
 interface CardComponentProps{
@@ -7,19 +7,26 @@ interface CardComponentProps{
     content?: React.ReactElement;
     likeButtonEnabled?: boolean;
     liked?: boolean;
+    onLiked?: () => void;
+    deleteButtonEnabled?: boolean;
+    onDeleted?: () => void;
 }
 
 const CardComponent: React.FC<CardComponentProps> = ({ 
     image = "/images/placeholder.jpg",
     content, 
     likeButtonEnabled,
-    liked = false
+    liked = false,
+    onLiked = () => {},
+    deleteButtonEnabled = false,
+    onDeleted = () => {},
 }) => {
 
     const [isLiked, setIsLiked] = useState(liked);
 
     const handleLikeClick = () =>{
         setIsLiked(!isLiked)
+        onLiked()
     }
 
     return (
@@ -49,8 +56,8 @@ const CardComponent: React.FC<CardComponentProps> = ({
                 {likeButtonEnabled &&(
                     <div className="
                         absolute
-                        top-3
-                        right-3
+                        bottom-3
+                        left-3
                     ">
                         <div
                             onClick={handleLikeClick}
@@ -73,6 +80,37 @@ const CardComponent: React.FC<CardComponentProps> = ({
                             <AiFillHeart
                                 size={24}
                                 className={isLiked ? "fill-rose-500" : "fill-neutral-500/70"}
+                            />
+                        </div>
+                    </div>
+                )}
+                {deleteButtonEnabled &&(
+                    <div className="
+                        absolute
+                        bottom-3
+                        right-3
+                    ">
+                        <div
+                            onClick={onDeleted}
+                            className="
+                                relative
+                                hover:opacity-80
+                                transition
+                                cursor-pointer
+                            "
+                            >
+                            <AiOutlineDelete
+                                size={28}
+                                className="
+                                fill-white
+                                absolute
+                                -top-[2px]
+                                -right-[2px]
+                                "
+                            />
+                            <AiFillDelete
+                                size={24}
+                                className={"fill-red-500"}
                             />
                         </div>
                     </div>

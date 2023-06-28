@@ -77,6 +77,11 @@ const CarsPage = () => {
                     </div>
                   )
                 }
+                likeButtonEnabled
+                liked
+                onLiked={() => {}}
+                deleteButtonEnabled
+                onDeleted={() => {}}
               />
             ))}
           </div>
