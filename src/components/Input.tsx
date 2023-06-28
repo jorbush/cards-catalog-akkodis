@@ -4,24 +4,26 @@ interface InputProps {
     label?: string;
     value?: string;
     onChange: (e: React.ChangeEvent<HTMLInputElement>)  => void;
+    hasError?: boolean;
 }
 
 const Input: React.FC<InputProps> = ({
     value,
     label,
-    onChange
+    onChange,
+    hasError = false
 }) => {
     return(
         <div className="mb-6">
-            <label htmlFor="name" className="block text-gray-700 font-bold mb-2">
+            <label htmlFor={label?.toLowerCase()} className="block text-gray-700 font-bold mb-2">
                 {label}
             </label>
             <input
                 type="text"
-                id="name"
+                id={label?.toLowerCase()}
                 value={value}
                 onChange={onChange}
-                className="
+                className={`
                     appearance-none 
                     border 
                     rounded 
@@ -31,8 +33,8 @@ const Input: React.FC<InputProps> = ({
                     text-gray-700 
                     leading-tight 
                     focus:outline-none 
-                    focus:border-blue-500
-                "
+                    ${hasError ? "border-red-500" : "focus:border-blue-500"}
+                `}
             />
         </div>
     )
