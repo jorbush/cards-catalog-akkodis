@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import usersData from '../data/users.json';
+import carsData from '../data/cars.json';
 import UserForm from '../components/UserForm';
 import User from '../../types/User';
 import CardComponent from '../components/CardComponent';
@@ -10,6 +11,7 @@ import ToasterProvider from '../providers/ToasterProvider';
 const HomePage = () => {
     const [showForm, setShowForm] = useState(false);
     const [users, setUsers] = useState(usersData.usuarios);
+    const [cars, setCars] = useState(carsData.coches)
 
     const toggleForm = () => {
         setShowForm(!showForm);
@@ -81,6 +83,7 @@ const HomePage = () => {
             {showForm && 
                 <UserForm 
                     users={users} 
+                    cars={cars}
                     onToggleForm={toggleForm} 
                     onAddUser={addUser} 
                 />

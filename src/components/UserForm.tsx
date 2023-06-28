@@ -1,18 +1,21 @@
 import React, { useState } from 'react';
 import 'tailwindcss/tailwind.css';
 import User from '../../types/User';
+import Car from '../../types/Car';
 import Dialog from './Dialog';
 import { toast } from "react-hot-toast";
 import Input from './Input';
 
 interface UserFormProps {
     users: User[];
+    cars: Car[];
     onToggleForm: () => void;
     onAddUser: (newUser: User) => void;
 }
 
 const UserForm: React.FC<UserFormProps> = ({ 
     users, 
+    cars,
     onToggleForm, 
     onAddUser 
 }) => {
@@ -20,7 +23,8 @@ const UserForm: React.FC<UserFormProps> = ({
     const [nameError, setNameError] = useState(false);
     const [email, setEmail] = useState('');
     const [emailError, setEmailError] = useState(false);
-    const [favoriteCars, setFavoriteCars] = useState<number[]>([]);      
+    const [favoriteCars, setFavoriteCars] = useState<string[]>([]); 
+    const [favoriteCarIds, setFavoriteCarIds] = useState<number[]>([]);      
     const [favoriteCarsError, setFavoriteCarsError] = useState(false);
 
     const nameRegex = /^.{0,10}$/;
@@ -35,7 +39,7 @@ const UserForm: React.FC<UserFormProps> = ({
             id: users.length + 1,
             name,
             email,
-            coches_favoritos: favoriteCars,
+            coches_favoritos: favoriteCarIds,
         };
         onAddUser(newUser);
         onToggleForm();
@@ -80,13 +84,45 @@ const UserForm: React.FC<UserFormProps> = ({
             toast.error("Favorite cars cannot be empty");
             setFavoriteCarsError(true);
             isValid = false;
-        } else {
+        } else if (favoriteCars.length > 3){
+            toast.error("The maximum number of cars is 3.");
+            setFavoriteCarsError(true);
+            isValid = false;
+        } else if (favoriteCars.length !== favoriteCarIds.length){
+            toast.error("There is a car that is not available");
+            setFavoriteCarsError(true);
+            isValid = false;
+        }  else {
             setFavoriteCarsError(false);
         }
       
         return isValid;
-      };
-      
+    };
+
+    const addFavoriteCar = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const carNames = e.target.value.split(',');
+        const carIds: number[] = [];
+        setFavoriteCars(carNames)
+        if (carNames.length > 3){
+            toast.error("The maximum number of cars is 3.");
+            setFavoriteCarsError(true);
+        } else {
+            for (const carName of carNames) {
+                if (carName.trim() !== ""){
+                const foundCar = cars.find((car) => car.nombre.trim().toLowerCase() === carName.trim().toLowerCase());
+                    if (foundCar) {
+                        carIds.push(foundCar.id);
+                        setFavoriteCarsError(false)
+                    } else {
+                        //toast.error(`Car "${carName}" not found`);
+                        setFavoriteCarsError(true)
+                        break
+                    } 
+                }
+            }
+        }
+        setFavoriteCarIds(carIds);
+    };
   
     return (
         <Dialog
@@ -111,33 +147,15 @@ const UserForm: React.FC<UserFormProps> = ({
                             label="Email"
                             hasError={emailError}
                         />
-                        <div className="mb-6">
-                            <label htmlFor="favoriteCars" className="block text-gray-700 font-bold mb-2">
-                                Favorite cars
-                            </label>
-                            <input
-                                type="text"
-                                id="favoriteCars"
-                                value={favoriteCars.join(',')}
-                                onChange={(e) =>
-                                    setFavoriteCars(
-                                        e.target.value.split(',').map((car) => parseInt(car.trim(), 10))
-                                    )
-                                }
-                                className="
-                                    appearance-none 
-                                    border 
-                                    rounded 
-                                    w-full 
-                                    py-2 
-                                    px-3 
-                                    text-gray-700 
-                                    leading-tight 
-                                    focus:outline-none 
-                                    focus:border-blue-500
-                                "
-                            />
-                        </div>
+                        <Input 
+                            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                                addFavoriteCar(e)
+                            }}
+                            value={favoriteCars.join(',')}
+                            label="Favorite cars"
+                            hasError={favoriteCarsError}
+                        />
+                       
                         <button
                             type="submit"
                             className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full"
