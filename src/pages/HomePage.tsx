@@ -28,42 +28,42 @@ const HomePage = () => {
             sm:px-7
             px-4
         ">
-            <div className="
-                text-2xl 
-                font-bold
-                pt-4
-                pb-4
-            ">
-                Users
+            <div className="flex justify-center">
+                <div className="
+                    text-2xl 
+                    font-bold
+                    pt-4
+                    pb-4
+                ">
+                    Users
+                </div>  
             </div>
-            <div className="
-                grid 
-                grid-cols-1
-                sm:grid-cols-2 
-                md:grid-cols-3 
-                lg:grid-cols-4
-                xl:grid-cols-5
-                2xl:grid-cols-6
-                gap-8
-            "
-            >
-                {users.map((user: User) => (
-                    <CardComponent key={user.id} content={
-                        (
-                            <div className="flex flex-col gap-2">
-                                <div>{user.name}</div>
-                                <div>{user.email}</div>
-                                <div className='flex flex-row'>
-                                    {user.coches_favoritos.map((car) => (
-                                        <div key={car}>{car}</div>
-                                    ))}
+            
+            <div className="flex justify-center">
+                <div className="
+                    grid 
+                    grid-cols-1
+                    gap-4
+                ">
+                    {users.map((user: User) => (
+                        <CardComponent key={user.id} content={
+                            (
+                                <div className="flex flex-col gap-2">
+                                    <div>{user.name}</div>
+                                    <div>{user.email}</div>
+                                    <div className='flex flex-row'>
+                                        {user.coches_favoritos.map((car) => (
+                                            <div key={car}>{car}</div>
+                                        ))}
+                                    </div>
+                                    
                                 </div>
-                                
-                            </div>
-                          )
-                    }/>
-                ))}
+                            )
+                        }/>
+                    ))}
+                </div>
             </div>
+            
             <button
                 className="
                     fixed 

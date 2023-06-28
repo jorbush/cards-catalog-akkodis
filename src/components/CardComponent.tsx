@@ -23,7 +23,12 @@ const CardComponent: React.FC<CardComponentProps> = ({
     }
 
     return (
-        <div className="flex flex-col gap-2 w-full">
+        <div className="
+            flex 
+            flex-row 
+            items-center
+            gap-2
+            w-[300px]">
             <div className="
                 aspect-square 
                 w-full 
