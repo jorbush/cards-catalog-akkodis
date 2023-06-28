@@ -3,6 +3,7 @@ import usersData from '../data/users.json';
 import UserForm from '../components/UserForm';
 import User from '../../types/User';
 import CardComponent from '../components/CardComponent';
+import NavigationHeader from '../components/NavigationHeader';
 
 
 const HomePage = () => {
@@ -28,16 +29,11 @@ const HomePage = () => {
             sm:px-7
             px-4
         ">
-            <div className="flex justify-center">
-                <div className="
-                    text-2xl 
-                    font-bold
-                    pt-4
-                    pb-4
-                ">
-                    Users
-                </div>  
-            </div>
+            <NavigationHeader
+                activePage='Users'
+                primaryText='Users'
+                secondaryText='Cars'
+            />
             
             <div className="flex justify-center">
                 <div className="
