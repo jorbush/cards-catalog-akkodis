@@ -39,7 +39,8 @@ const HomePage = () => {
                 <div className="
                     grid 
                     grid-cols-1
-                    gap-4
+                    pt-4
+                    gap-8
                 ">
                     {users.map((user: User) => (
                         <CardComponent key={user.id} content={

@@ -76,7 +76,7 @@ const CardComponent: React.FC<CardComponentProps> = ({
                     </div>
                 )}
             </div>
-            <div className="relative p-6 flex-auto">
+            <div className="relative p-6 pt-0 pb-0 flex-auto">
                 {content}
             </div>
         </div>

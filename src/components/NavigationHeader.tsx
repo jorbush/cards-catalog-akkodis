@@ -34,7 +34,7 @@ const NavigationHeader: React.FC<NavigationHeaderProps> = ({
         ">
             <div
                 className={`p-2 cursor-pointer ${
-                activePage === primaryText ? 'text-black' : 'text-gray-700'
+                activePage === primaryText ? 'text-black' : 'text-gray-400'
                 }`}
                 onClick={() => navigateToPage('/')}
             >
@@ -42,7 +42,7 @@ const NavigationHeader: React.FC<NavigationHeaderProps> = ({
             </div>
             <div
                 className={`p-2 cursor-pointer ${
-                activePage === secondaryText ? 'text-black' : 'text-gray-700'
+                activePage === secondaryText ? 'text-black' : 'text-gray-400'
                 }`}
                 onClick={() => navigateToPage('/cars')}
             >
