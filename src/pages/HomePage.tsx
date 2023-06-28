@@ -75,9 +75,7 @@ const HomePage = () => {
                                     <div>{user.name}</div>
                                     <div>{user.email}</div>
                                     <div className='flex flex-row'>
-                                        {user.coches_favoritos.map((car) => (
-                                            <div key={car}>{car}</div>
-                                        ))}
+                                    {user.coches_favoritos.join(", ")}
                                     </div>
                                 </div>
                             )
