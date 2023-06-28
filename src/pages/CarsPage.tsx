@@ -23,7 +23,6 @@ const CarsPage = () => {
                 grid 
                 grid-cols-1
                 pt-4
-                gap-8
               ">
                 {carsData.coches.map((car) => (
                   <CardComponent 

@@ -27,7 +27,9 @@ const CardComponent: React.FC<CardComponentProps> = ({
             flex 
             flex-row 
             items-center
-            w-[300px]">
+            w-[300px]
+            mb-8
+        ">
             <div className="
                 aspect-square 
                 w-[100px]
