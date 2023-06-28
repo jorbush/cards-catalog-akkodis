@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import usersData from '../data/users.json';
 import UserForm from '../components/UserForm';
 import User from '../../types/User';
+import CardComponent from '../components/CardComponent';
 
 
 const HomePage = () => {
@@ -19,13 +20,50 @@ const HomePage = () => {
     };
       
     return (
-        <div>
-            <h1>Users</h1>
-            <ul>
-                {users.map((user) => (
-                    <li key={user.id}>{user.name}</li>
+        <div className="
+            max-w-[2520px]
+            mx-auto
+            xl:px-20
+            md:px-10
+            sm:px-7
+            px-4
+        ">
+            <div className="
+                text-2xl 
+                font-bold
+                pt-4
+                pb-4
+            ">
+                Users
+            </div>
+            <div className="
+                grid 
+                grid-cols-1
+                sm:grid-cols-2 
+                md:grid-cols-3 
+                lg:grid-cols-4
+                xl:grid-cols-5
+                2xl:grid-cols-6
+                gap-8
+            "
+            >
+                {users.map((user: User) => (
+                    <CardComponent key={user.id} content={
+                        (
+                            <div className="flex flex-col gap-2">
+                                <div>{user.name}</div>
+                                <div>{user.email}</div>
+                                <div className='flex flex-row'>
+                                    {user.coches_favoritos.map((car) => (
+                                        <div key={car}>{car}</div>
+                                    ))}
+                                </div>
+                                
+                            </div>
+                          )
+                    }/>
                 ))}
-            </ul>
+            </div>
             <button
                 className="
                     fixed 
