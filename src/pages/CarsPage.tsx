@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import carsData from '../data/cars.json';
 import NavigationHeader from '../components/NavigationHeader';
 import CardComponent from '../components/CardComponent';
@@ -12,6 +12,28 @@ const CarsPage = () => {
   const [users, setUsers] = useState(usersData.usuarios);
   const [cars, setCars] = useState(carsData.coches)
   const [showForm, setShowForm] = useState(false);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const cachedUsers = localStorage.getItem('users')
+    const cachedCars = localStorage.getItem('cars')
+    //console.log(cachedCars, cachedUsers)
+    if (cachedUsers) {
+        setUsers(JSON.parse(cachedUsers))
+    } 
+    if (cachedCars){
+        setCars(JSON.parse(cachedCars))
+    }
+    setLoading(false);
+  }, []);
+
+  useEffect(() => {
+    if (!loading) {
+      localStorage.setItem('users', JSON.stringify(users));
+      localStorage.setItem('cars', JSON.stringify(cars));
+      //console.log("Saving on cache")
+    }
+  }, [users, cars]);
 
   const toggleForm = () => {
     setShowForm(!showForm);
