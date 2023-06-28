@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import 'tailwindcss/tailwind.css';
 import User from '../../types/User';
 import Dialog from './Dialog';
+import { toast } from "react-hot-toast";
 
 interface UserFormProps {
     users: User[];
@@ -28,6 +29,7 @@ const UserForm: React.FC<UserFormProps> = ({
         };
         onAddUser(newUser);
         onToggleForm();
+        toast.success('User added');
         clearInputs();
     };
 

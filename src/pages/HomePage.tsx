@@ -4,6 +4,7 @@ import UserForm from '../components/UserForm';
 import User from '../../types/User';
 import CardComponent from '../components/CardComponent';
 import NavigationHeader from '../components/NavigationHeader';
+import ToasterProvider from '../providers/ToasterProvider';
 
 
 const HomePage = () => {
@@ -29,6 +30,7 @@ const HomePage = () => {
             sm:px-7
             px-4
         ">
+            <ToasterProvider/>
             <NavigationHeader
                 activePage='Users'
                 primaryText='Users'
