@@ -23,7 +23,7 @@ const Dialog: React.FC<DialogProps> = ({
             z-50 
             outline-none 
             focus:outline-none
-            bg-neutral-800/70
+            backdrop-blur
         ">
         <div className="
             relative 
@@ -36,6 +36,8 @@ const Dialog: React.FC<DialogProps> = ({
             mx-auto 
             h-auto 
             bg-white
+            shadow-lg
+            border-[1px]
             rounded-xl
             p-6
           "
@@ -43,11 +45,11 @@ const Dialog: React.FC<DialogProps> = ({
             <div className='
                 flex
                 flex-row
+                justify-end
             '>
                 <IoMdClose size={18} onClick={onToggleForm}/>
-
             </div>
-            <div className="relative p-6 flex-auto">
+            <div className="relative flex-auto">
                 {content}
             </div>
         </div>
