@@ -47,7 +47,7 @@ const Dialog: React.FC<DialogProps> = ({
                 flex-row
                 justify-end
             '>
-                <IoMdClose size={18} onClick={onToggleForm}/>
+                <IoMdClose size={18} className='cursor-pointer' onClick={onToggleForm}/>
             </div>
             <div className="relative flex-auto">
                 {content}

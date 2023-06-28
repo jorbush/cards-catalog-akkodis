@@ -136,6 +136,7 @@ const UserForm: React.FC<UserFormProps> = ({
                             }}
                             value={name}
                             label="Name"
+                            placeholder="User name"
                             hasError={nameError}
                         />
                         <Input 
@@ -144,6 +145,7 @@ const UserForm: React.FC<UserFormProps> = ({
                                 setEmailError(false)
                             }}
                             value={email}
+                            placeholder='User email'
                             label="Email"
                             hasError={emailError}
                         />
@@ -153,6 +155,7 @@ const UserForm: React.FC<UserFormProps> = ({
                             }}
                             value={favoriteCars.join(',')}
                             label="Favorite cars"
+                            placeholder='e.g. Formentor, Ateca, ...'
                             hasError={favoriteCarsError}
                         />
                        

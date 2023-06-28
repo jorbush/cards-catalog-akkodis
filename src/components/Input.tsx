@@ -3,6 +3,7 @@ import React from "react";
 interface InputProps {
     label?: string;
     value?: string;
+    placeholder?: string;
     onChange: (e: React.ChangeEvent<HTMLInputElement>)  => void;
     hasError?: boolean;
 }
@@ -11,6 +12,7 @@ const Input: React.FC<InputProps> = ({
     value,
     label,
     onChange,
+    placeholder,
     hasError = false
 }) => {
     return(
@@ -23,6 +25,7 @@ const Input: React.FC<InputProps> = ({
                 id={label?.toLowerCase()}
                 value={value}
                 onChange={onChange}
+                placeholder={placeholder}
                 className={`
                     appearance-none 
                     border 

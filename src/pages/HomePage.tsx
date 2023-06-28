@@ -6,12 +6,13 @@ import User from '../../types/User';
 import CardComponent from '../components/CardComponent';
 import NavigationHeader from '../components/NavigationHeader';
 import ToasterProvider from '../providers/ToasterProvider';
+import AddButton from '../components/AddButton';
 
 
 const HomePage = () => {
-    const [showForm, setShowForm] = useState(false);
     const [users, setUsers] = useState(usersData.usuarios);
     const [cars, setCars] = useState(carsData.coches)
+    const [showForm, setShowForm] = useState(false);
 
     const toggleForm = () => {
         setShowForm(!showForm);
@@ -56,30 +57,13 @@ const HomePage = () => {
                                             <div key={car}>{car}</div>
                                         ))}
                                     </div>
-                                    
                                 </div>
                             )
                         }/>
                     ))}
                 </div>
             </div>
-            
-            <button
-                className="
-                    fixed 
-                    bottom-4 
-                    right-4 
-                    pr-4
-                    pl-4
-                    pt-2.5 
-                    pb-2.5
-                    rounded-full 
-                    bg-blue-500 
-                    text-white"
-                onClick={toggleForm}
-            >
-                {'+'}
-            </button>
+            <AddButton onClick={toggleForm}/>
             {showForm && 
                 <UserForm 
                     users={users} 

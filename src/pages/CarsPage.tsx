@@ -1,10 +1,27 @@
-import React from 'react';
+import React, { useState } from 'react';
 import carsData from '../data/cars.json';
 import NavigationHeader from '../components/NavigationHeader';
 import CardComponent from '../components/CardComponent';
 import ToasterProvider from '../providers/ToasterProvider';
+import AddButton from '../components/AddButton';
+import CarForm from '../components/CarForm';
+import usersData from '../data/users.json';
+import Car from '../../types/Car';
 
 const CarsPage = () => {
+  const [users, setUsers] = useState(usersData.usuarios);
+  const [cars, setCars] = useState(carsData.coches)
+  const [showForm, setShowForm] = useState(false);
+
+  const toggleForm = () => {
+    setShowForm(!showForm);
+  };
+
+  const addCar = (newCar: Car) => {
+    const updatedCars = [...cars, newCar];
+    console.log(updatedCars)
+    setCars(updatedCars);
+  };
     return (
       <div className="
             max-w-[2520px]
@@ -26,7 +43,7 @@ const CarsPage = () => {
             grid-cols-1
             pt-4
           ">
-            {carsData.coches.map((car) => (
+            {cars.map((car) => (
               <CardComponent 
                 key={car.id} 
                 image="/images/ibiza.jpeg"
@@ -42,6 +59,16 @@ const CarsPage = () => {
             ))}
           </div>
         </div>
+        <AddButton onClick={toggleForm}/>
+          {showForm && 
+              <CarForm
+                  users={users} 
+                  cars={cars}
+                  onToggleForm={toggleForm} 
+                  onAddCar={addCar} 
+                  onUpdateUser={()=>{}}
+              />
+          }
       </div>
     );
   };
