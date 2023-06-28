@@ -27,11 +27,10 @@ const CardComponent: React.FC<CardComponentProps> = ({
             flex 
             flex-row 
             items-center
-            gap-2
             w-[300px]">
             <div className="
                 aspect-square 
-                w-full 
+                w-[100px]
                 relative 
                 overflow-hidden 
                 rounded-xl
