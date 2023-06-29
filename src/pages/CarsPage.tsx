@@ -146,7 +146,7 @@ const CarsPage = () => {
           onUpdateUser={() => {}}
         />
       )}
-      <div className="flex justify-center">
+      <div className="flex justify-center my-10">
         <BackupButton onClick={restoreInitialData}/>
       </div>
     </div>

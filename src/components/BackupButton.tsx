@@ -25,7 +25,6 @@ const BackupButton: React.FC<BackupButtonProps> = ({
                 focus:shadow-outline 
                 gap-4
                 justify-center
-                mt-10
                 cursor-pointer
             ">
                 <LuDatabaseBackup

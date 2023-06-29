@@ -78,10 +78,12 @@ const HomePage = () => {
                         <CardComponent key={user.id} content={
                             (
                                 <div className="flex flex-col gap-2">
-                                    <div>{user.name}</div>
+                                    <div className="font-semibold">{user.name}</div>
                                     <div>{user.email}</div>
-                                    <div className='flex flex-row'>
-                                    {user.coches_favoritos.join(", ")}
+                                    <div className='flex flex-row text-gray-500'>
+                                        {user.coches_favoritos.map((carId) =>
+                                            cars.find((car) => car.id === carId)?.nombre
+                                        ).join(", ")}
                                     </div>
                                 </div>
                             )
@@ -98,7 +100,7 @@ const HomePage = () => {
                     onAddUser={addUser} 
                 />
             }
-            <div className="flex justify-center">
+            <div className="flex justify-center my-10">
                 <BackupButton onClick={restoreInitialData}/>
             </div>
         </div>
