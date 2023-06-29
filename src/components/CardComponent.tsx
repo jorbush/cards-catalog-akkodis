@@ -22,13 +22,6 @@ const CardComponent: React.FC<CardComponentProps> = ({
     onDeleted = () => {},
 }) => {
 
-    const [isLiked, setIsLiked] = useState(liked);
-
-    const handleLikeClick = () =>{
-        setIsLiked(!isLiked)
-        onLiked()
-    }
-
     return (
         <div className="
             flex 
@@ -60,7 +53,7 @@ const CardComponent: React.FC<CardComponentProps> = ({
                         left-3
                     ">
                         <div
-                            onClick={handleLikeClick}
+                            onClick={onLiked}
                             className="
                                 relative
                                 hover:opacity-80
@@ -79,7 +72,7 @@ const CardComponent: React.FC<CardComponentProps> = ({
                             />
                             <AiFillHeart
                                 size={24}
-                                className={isLiked ? "fill-rose-500" : "fill-neutral-500/70"}
+                                className={liked ? "fill-rose-500" : "fill-neutral-500/70"}
                             />
                         </div>
                     </div>
