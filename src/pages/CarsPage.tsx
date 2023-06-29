@@ -9,6 +9,7 @@ import usersData from '../data/users.json';
 import Car from '../../types/Car';
 import User from '../../types/User';
 import { toast } from "react-hot-toast";
+import BackupButton from '../components/BackupButton';
 
 const CarsPage = () => {
   const [users, setUsers] = useState(usersData.usuarios);
@@ -40,6 +41,11 @@ const CarsPage = () => {
     setShowForm(!showForm);
   };
 
+  const restoreInitialData = () => {
+    setUsers(usersData.usuarios)
+    setCars(carsData.coches)
+  };
+
   const addCar = (newCar: Car) => {
     const updatedCars = [...cars, newCar];
     setCars(updatedCars);
@@ -51,7 +57,7 @@ const CarsPage = () => {
 
   const checkCarLiked = (carId: number): boolean => {
     if (selectedUser) {
-      console.log(selectedUser.coches_favoritos.includes(carId))
+      // console.log(selectedUser.coches_favoritos.includes(carId))
       return selectedUser.coches_favoritos.includes(carId);
     }
     return false;
@@ -109,7 +115,7 @@ const CarsPage = () => {
         </select>
       </div>
 
-      <div className="flex justify-center">
+      <div className="flex justify-center mt-4">
         <div className="grid grid-cols-1 pt-4">
           {cars.map((car) => (
             <CardComponent
@@ -140,6 +146,9 @@ const CarsPage = () => {
           onUpdateUser={() => {}}
         />
       )}
+      <div className="flex justify-center">
+        <BackupButton onClick={restoreInitialData}/>
+      </div>
     </div>
   );
 };

@@ -7,6 +7,7 @@ import CardComponent from '../components/CardComponent';
 import NavigationHeader from '../components/NavigationHeader';
 import ToasterProvider from '../providers/ToasterProvider';
 import AddButton from '../components/AddButton';
+import BackupButton from '../components/BackupButton';
 
 
 const HomePage = () => {
@@ -44,6 +45,11 @@ const HomePage = () => {
         const updatedUsers = [...users, newUser];
         //console.log(updatedUsers)
         setUsers(updatedUsers);
+    };
+
+    const restoreInitialData = () => {
+        setUsers(usersData.usuarios)
+        setCars(carsData.coches)
     };
       
     return (
@@ -92,6 +98,9 @@ const HomePage = () => {
                     onAddUser={addUser} 
                 />
             }
+            <div className="flex justify-center">
+                <BackupButton onClick={restoreInitialData}/>
+            </div>
         </div>
     );
 };
