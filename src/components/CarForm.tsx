@@ -7,19 +7,15 @@ import { toast } from "react-hot-toast";
 import Input from './Input';
 
 interface CarFormProps {
-    users: User[];
     cars: Car[];
     onToggleForm: () => void;
     onAddCar: (newCar: Car) => void;
-    onUpdateUser: (newUser: User) => void;
 }
 
 const CarForm: React.FC<CarFormProps> = ({ 
-    users, 
     cars,
     onToggleForm, 
     onAddCar,
-    onUpdateUser
 }) => {
     const [name, setName] = useState('');
     const [nameError, setNameError] = useState(false);
@@ -33,8 +29,9 @@ const CarForm: React.FC<CarFormProps> = ({
         if (!isValidForm()){
             return 
         }
+        const newId = cars.length > 0 ? cars[cars.length - 1].id + 1 : 0
         const newCar: Car = {
-            id: cars.length + 1,
+            id: newId,
             nombre: name,
             marca: brand
         };

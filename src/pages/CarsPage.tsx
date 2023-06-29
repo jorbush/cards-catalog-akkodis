@@ -63,6 +63,23 @@ const CarsPage = () => {
     return false;
   };
 
+  const handleDeleteCar = (id: number) => {
+
+    const updatedCars = cars.filter((car) => car.id !== id);
+    setCars(updatedCars);
+
+    toast.success('Car deleted!')
+  
+    const updatedUsers = users.map((user) => {
+      const updatedFavoriteCars = user.coches_favoritos.filter((car) => car !== id);
+      const updatedUser = { ...user, coches_favoritos: updatedFavoriteCars };
+      return updatedUser;
+    });
+  
+    setUsers(updatedUsers);
+  };
+  
+
   const handleLikeClick = (carId: number) => {
     if (selectedUser) {
       const userIndex = users.findIndex((user) => user.id === selectedUser.id);
@@ -131,7 +148,7 @@ const CarsPage = () => {
               liked={checkCarLiked(car.id)}
               onLiked={() => handleLikeClick(car.id)}
               deleteButtonEnabled
-              onDeleted={() => {}}
+              onDeleted={() => handleDeleteCar(car.id)}
             />
           ))}
         </div>
@@ -139,11 +156,9 @@ const CarsPage = () => {
       <AddButton onClick={toggleForm} />
       {showForm && (
         <CarForm
-          users={users}
           cars={cars}
           onToggleForm={toggleForm}
           onAddCar={addCar}
-          onUpdateUser={() => {}}
         />
       )}
       <div className="flex justify-center my-10">
