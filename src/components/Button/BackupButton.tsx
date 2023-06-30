@@ -12,6 +12,8 @@ const BackupButton: React.FC<BackupButtonProps> = ({
         <div
             onClick={onClick}
             className="
+                fixed 
+                bottom-8 
                 flex
                 flex-row
                 bg-green-500 

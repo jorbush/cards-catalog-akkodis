@@ -9,6 +9,7 @@ import ToasterProvider from '../providers/ToasterProvider';
 import AddButton from '../components/Button/AddButton';
 import BackupButton from '../components/Button/BackupButton';
 import { AiOutlineUserAdd } from "react-icons/ai";
+import { toast } from "react-hot-toast";
 
 const HomePage = () => {
     const [users, setUsers] = useState(usersData.usuarios);
@@ -51,6 +52,13 @@ const HomePage = () => {
         setUsers(usersData.usuarios)
         setCars(carsData.coches)
     };
+
+    const handleDeleteUser = (id: number) => {
+        const updatedUsers = users.filter((user) => user.id !== id);
+        setUsers(updatedUsers);
+    
+        toast.success('User deleted!')
+    };
       
     return (
         <div className="
@@ -75,19 +83,24 @@ const HomePage = () => {
                     pt-4
                 ">
                     {users.map((user: User) => (
-                        <CardComponent key={user.id} content={
-                            (
-                                <div className="flex flex-col gap-2">
-                                    <div className="font-semibold">{user.name}</div>
-                                    <div>{user.email}</div>
-                                    <div className='flex flex-row text-gray-500'>
-                                        {user.coches_favoritos.map((carId) =>
-                                            cars.find((car) => car.id === carId)?.nombre
-                                        ).join(", ")}
+                        <CardComponent 
+                            key={user.id} 
+                            content={
+                                (
+                                    <div className="flex flex-col gap-2">
+                                        <div className="font-semibold">{user.name}</div>
+                                        <div>{user.email}</div>
+                                        <div className='flex flex-row text-gray-500'>
+                                            {user.coches_favoritos.map((carId) =>
+                                                cars.find((car) => car.id === carId)?.nombre
+                                            ).join(", ")}
+                                        </div>
                                     </div>
-                                </div>
-                            )
-                        }/>
+                                )
+                            }
+                            deleteButtonEnabled
+                            onDeleted={() => handleDeleteUser(user.id)}
+                            />
                     ))}
                 </div>
             </div>

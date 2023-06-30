@@ -35,8 +35,10 @@ const UserForm: React.FC<UserFormProps> = ({
         if (!isValidForm()){
             return 
         }
+        const newId = users.length > 0 ? users[users.length - 1].id + 1 : 0
+
         const newUser: User = {
-            id: users.length + 1,
+            id: newId,
             name,
             email,
             coches_favoritos: favoriteCarIds,
