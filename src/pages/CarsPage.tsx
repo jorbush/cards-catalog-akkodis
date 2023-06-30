@@ -108,7 +108,7 @@ const CarsPage = () => {
   }
 
   return (
-    <div className="max-w-[2520px] mx-auto xl:px-20 md:px-10 sm:px-7 px-4">
+    <div className="max-w-[2520px] mx-auto xl:px-20 md:px-10 sm:px-7 px-4 pb-10">
       <ToasterProvider />
       <NavigationHeader activePage="Cars" primaryText="Users" secondaryText="Cars" />
       <div className="flex justify-center">
