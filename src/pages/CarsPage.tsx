@@ -3,13 +3,15 @@ import carsData from '../data/cars.json';
 import NavigationHeader from '../components/NavigationHeader';
 import CardComponent from '../components/CardComponent';
 import ToasterProvider from '../providers/ToasterProvider';
-import AddButton from '../components/AddButton';
-import CarForm from '../components/CarForm';
+import AddButton from '../components/Button/AddButton';
+import CarForm from '../components/Form/CarForm';
 import usersData from '../data/users.json';
 import Car from '../../types/Car';
 import User from '../../types/User';
 import { toast } from "react-hot-toast";
-import BackupButton from '../components/BackupButton';
+import BackupButton from '../components/Button/BackupButton';
+import {AiFillCar} from 'react-icons/ai'
+
 
 const CarsPage = () => {
   const [users, setUsers] = useState(usersData.usuarios);
@@ -153,7 +155,10 @@ const CarsPage = () => {
           ))}
         </div>
       </div>
-      <AddButton onClick={toggleForm} />
+      <AddButton 
+        onClick={toggleForm}
+        content={(<AiFillCar size={24}/>)}
+      />
       {showForm && (
         <CarForm
           cars={cars}

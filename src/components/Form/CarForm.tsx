@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import 'tailwindcss/tailwind.css';
-import User from '../../types/User';
-import Car from '../../types/Car';
+import User from '../../../types/User';
+import Car from '../../../types/Car';
 import Dialog from './Dialog';
 import { toast } from "react-hot-toast";
-import Input from './Input';
+import Input from '../Input';
 
 interface CarFormProps {
     cars: Car[];

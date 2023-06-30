@@ -18,8 +18,8 @@ const BackupButton: React.FC<BackupButtonProps> = ({
                 hover:bg-green-700 
                 text-white 
                 font-bold 
-                p-4
-                px-7
+                p-3
+                px-5
                 rounded 
                 focus:outline-none 
                 focus:shadow-outline 

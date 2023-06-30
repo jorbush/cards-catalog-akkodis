@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import usersData from '../data/users.json';
 import carsData from '../data/cars.json';
-import UserForm from '../components/UserForm';
+import UserForm from '../components/Form/UserForm';
 import User from '../../types/User';
 import CardComponent from '../components/CardComponent';
 import NavigationHeader from '../components/NavigationHeader';
 import ToasterProvider from '../providers/ToasterProvider';
-import AddButton from '../components/AddButton';
-import BackupButton from '../components/BackupButton';
-
+import AddButton from '../components/Button/AddButton';
+import BackupButton from '../components/Button/BackupButton';
+import { AiOutlineUserAdd } from "react-icons/ai";
 
 const HomePage = () => {
     const [users, setUsers] = useState(usersData.usuarios);
@@ -91,7 +91,10 @@ const HomePage = () => {
                     ))}
                 </div>
             </div>
-            <AddButton onClick={toggleForm}/>
+            <AddButton 
+                onClick={toggleForm}
+                content={(<AiOutlineUserAdd size={24}/>)}
+            />
             {showForm && 
                 <UserForm 
                     users={users} 
