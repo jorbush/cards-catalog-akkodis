@@ -165,7 +165,58 @@ def add_car_user(ids):
 
 
 def delete_car_user(ids):
-    print(ids)
+    car_id = ids[0]
+    user_id = ids[1]
+
+    print('Adding car with ID ' + str(car_id) + ' as a favorite to the user with ID ' + str(user_id))
+
+    favorite_car = None
+    update_user = None
+
+    with open(cars_path, 'r') as file:
+        cars_data = json.load(file)
+
+    for car in cars_data['coches']:
+        if car['id'] == car_id:
+            favorite_car = car
+            break
+
+    with open(users_path, 'r') as file:
+        users_data = json.load(file)
+
+    for user in users_data['usuarios']:
+        if user['id'] == user_id:
+            update_user = user
+            break
+
+    if favorite_car is None:
+        cprint("Car with ID " + str(car_id) + " not found.", "red")
+        return
+
+    if update_user is None:
+        cprint("User with ID " + str(user_id) + " not found.", "red")
+        return
+
+    user_cars = list(update_user['coches_favoritos'])
+    if car_id not in user_cars:
+        cprint("User with ID " + str(user_id) + " has not have the car with ID " + str(car_id) + " as favorite.", "red")
+        return
+
+    user_cars.remove(car_id)
+
+    with open(users_path, 'w') as write_file:
+
+        update_user['coches_favoritos'] = user_cars
+
+        json.dump(users_data, write_file, indent=4)
+
+        cprint("Car removed successfully!", "green")
+        print("ID user: ", update_user['id'])
+        print("Username: ", update_user['name'])
+        print("Favorite cars: ", update_user['coches_favoritos'])
+        print("ID car: ", favorite_car['id'])
+        print("Car: ", favorite_car['nombre'])
+        print("Branch: ", favorite_car['marca'])
 
 
 if __name__ == '__main__':
