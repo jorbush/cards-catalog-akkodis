@@ -14,7 +14,7 @@ def car_catalog():
     parser = argparse.ArgumentParser(description='Car catalog')
 
     parser.add_argument('-a', '--add', action='store_true', help='Add a new user')
-    parser.add_argument('-d', '--delete', type=int, metavar='ID', help='Delete user with ID')
+    parser.add_argument('-d', '--delete', type=int, metavar='[id]', help='Delete user with ID')
     parser.add_argument('-r', '--restore', action='store_true', help='Restore all the data')
     parser.add_argument('-ac', '--add_car', type=int, nargs=2, metavar='[car_id] [user_id]',
                         help='The car with ID ( [car_id] '
@@ -100,7 +100,7 @@ def delete_user(user_id):
 
         cprint("User deleted successfully!", "green")
     else:
-        cprint("User with ID " + user_id + " not found.", "red")
+        cprint("User with ID " + str(user_id) + " not found.", "red")
 
 
 def restore_original_data():
@@ -110,7 +110,40 @@ def restore_original_data():
 
 
 def add_car_user(ids):
-    print(ids)
+    car_id = ids[0]
+    user_id = ids[1]
+
+    print('Adding car with ID ' + str(car_id) + ' as a favorite to the user with ID ' + str(user_id))
+
+    favorite_car = None
+    update_user = None
+
+    with open(cars_path, 'r') as file:
+        cars_data = json.load(file)
+
+    for car in cars_data['coches']:
+        if car['id'] == car_id:
+            favorite_car = car
+            break
+
+    with open(users_path, 'r') as file:
+        users_data = json.load(file)
+
+    for user in users_data['usuarios']:
+        if user['id'] == user_id:
+            update_user = user
+            break
+
+    if favorite_car is None:
+        cprint("Car with ID " + str(car_id) + " not found.", "red")
+        return
+
+    if update_user is None:
+        cprint("User with ID " + str(user_id) + " not found.", "red")
+        return
+
+    print(favorite_car)
+    print(update_user)
 
 
 def delete_car_user(ids):
