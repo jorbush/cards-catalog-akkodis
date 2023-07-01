@@ -53,6 +53,7 @@ def add_new_user():
         }
         users_data['usuarios'].append(new_user)
 
+    if users_data is not None:
         with open(users_path, 'w') as write_file:
             json.dump(users_data, write_file, indent=4)
 
@@ -61,6 +62,8 @@ def add_new_user():
             print("Username: ", new_user['name'])
             print("Email: ", new_user['email'])
             print("Favorite cars: ", new_user['coches_favoritos'])
+    else:
+        cprint("Something goes wrong while reading JSON file.", "red")
 
 
 def delete_user(user_id):
