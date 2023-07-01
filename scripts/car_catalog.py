@@ -1,6 +1,9 @@
 import argparse
 import re
 from termcolor import cprint
+import json
+
+json_user_path = '../src/data/users.json'
 
 
 def car_catalog():
@@ -30,9 +33,25 @@ def add_new_user():
         cprint("Error: Invalid email address format.", "red")
         email = input("Enter the email address: ")
 
-    cprint("New user added successfully!", "green")
-    print("Username:", username)
-    print("Email:", email)
+    with open(json_user_path, 'r') as file:
+        users_data = json.load(file)
+        new_id = users_data['usuarios'][-1]['id'] + 1
+        new_user = {
+            'id': new_id,
+            'name': username,
+            'email': email,
+            'coches_favoritos': []
+        }
+        users_data['usuarios'].append(new_user)
+
+        with open(json_user_path, 'w') as write_file:
+            json.dump(users_data, write_file, indent=4)
+
+            cprint("New user added successfully!", "green")
+            print("ID: ", new_user['id'])
+            print("Username: ", new_user['name'])
+            print("Email: ", new_user['email'])
+            print("Favorite cars: ", new_user['coches_favoritos'])
 
 
 def delete_user(user_id: str):
