@@ -25,12 +25,6 @@
                 1,
                 2
             ]
-        },
-        {
-            "id": 4,
-            "name": "jordi",
-            "email": "jordi@mail.com",
-            "coches_favoritos": []
         }
     ]
 }

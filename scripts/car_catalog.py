@@ -54,8 +54,27 @@ def add_new_user():
             print("Favorite cars: ", new_user['coches_favoritos'])
 
 
-def delete_user(user_id: str):
+def delete_user(user_id):
     print('Deleting the user with the ID ' + user_id + "...")
+
+    with open(json_user_path, 'r') as file:
+        users_data = json.load(file)
+
+    deleted_user = None
+    for user in users_data['usuarios']:
+        if user['id'] == int(user_id):
+            deleted_user = user
+            break
+
+    if deleted_user is not None:
+        users_data['usuarios'].remove(deleted_user)
+
+        with open(json_user_path, 'w') as write_file:
+            json.dump(users_data, write_file, indent=4)
+
+        cprint("User deleted successfully!", "green")
+    else:
+        cprint("User with ID " + user_id + " not found.", "red")
 
 
 if __name__ == '__main__':
