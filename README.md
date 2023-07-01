@@ -1,22 +1,27 @@
-# cars-catalog-akkodis
+# Car catalog Akkodis
 
-https://cars-catalog-akkodis.netlify.app/
+Deployed in: https://cars-catalog-akkodis.netlify.app/
+
+### Python script instructions
 
 - Python script path: 
-    
-    cd scripts/
+```bash
+cd scripts/
+```
 
-    - Install requirements
-    
-        pip install -r requirements.txt
+- Install requirements
+```bash
+pip install -r requirements.txt
+```
 
-    - Run the script
+- Run the script
+```bash
+python car_catalog.py
+```
 
-        python car_catalog.py
-
-    - See the available options
-        
-        python car_catalog.py --help
-
+- See the available options
+```bash
+python car_catalog.py --help
+```
 
     
