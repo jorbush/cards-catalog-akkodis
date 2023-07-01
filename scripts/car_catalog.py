@@ -14,17 +14,19 @@ def car_catalog():
     parser = argparse.ArgumentParser(description='Car catalog')
 
     parser.add_argument('-a', '--add', action='store_true', help='Add a new user')
-    parser.add_argument('-d', '--delete', type=str, metavar='ID', help='Delete user with ID')
+    parser.add_argument('-d', '--delete', type=int, metavar='ID', help='Delete user with ID')
     parser.add_argument('-r', '--restore', action='store_true', help='Restore all the data')
 
     args = parser.parse_args()
 
     if args.add:
         add_new_user()
-    if args.delete:
+    elif args.delete:
         delete_user(args.delete)
-    if args.restore:
+    elif args.restore:
         restore_original_data()
+    else:
+        return
 
 
 def add_new_user():
@@ -62,14 +64,14 @@ def add_new_user():
 
 
 def delete_user(user_id):
-    print('Deleting the user with the ID ' + user_id + "...")
+    print('Deleting the user with the ID ' + str(user_id) + "...")
 
     with open(users_path, 'r') as file:
         users_data = json.load(file)
 
     deleted_user = None
     for user in users_data['usuarios']:
-        if user['id'] == int(user_id):
+        if user['id'] == user_id:
             deleted_user = user
             break
 
@@ -87,7 +89,7 @@ def delete_user(user_id):
 def restore_original_data():
     shutil.copy(original_users_path, users_path)
     shutil.copy(original_cars_path, cars_path)
-    print("Original JSON files has been restored.")
+    print("Original JSON files have been restored.")
 
 
 if __name__ == '__main__':
