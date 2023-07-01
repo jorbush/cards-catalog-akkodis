@@ -142,8 +142,26 @@ def add_car_user(ids):
         cprint("User with ID " + str(user_id) + " not found.", "red")
         return
 
-    print(favorite_car)
-    print(update_user)
+    user_cars = list(update_user['coches_favoritos'])
+    if car_id in user_cars:
+        cprint("User with ID " + str(user_id) + " already has the car with ID " + str(car_id) + " as favorite.", "red")
+        return
+
+    user_cars.append(car_id)
+
+    with open(users_path, 'w') as write_file:
+
+        update_user['coches_favoritos'] = user_cars
+
+        json.dump(users_data, write_file, indent=4)
+
+        cprint("Car added successfully!", "green")
+        print("ID user: ", update_user['id'])
+        print("Username: ", update_user['name'])
+        print("Favorite cars: ", update_user['coches_favoritos'])
+        print("ID car: ", favorite_car['id'])
+        print("Car: ", favorite_car['nombre'])
+        print("Branch: ", favorite_car['marca'])
 
 
 def delete_car_user(ids):
