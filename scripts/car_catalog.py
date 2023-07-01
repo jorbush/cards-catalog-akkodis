@@ -16,6 +16,16 @@ def car_catalog():
     parser.add_argument('-a', '--add', action='store_true', help='Add a new user')
     parser.add_argument('-d', '--delete', type=int, metavar='ID', help='Delete user with ID')
     parser.add_argument('-r', '--restore', action='store_true', help='Restore all the data')
+    parser.add_argument('-ac', '--add_car', type=int, nargs=2, metavar='[car_id] [user_id]',
+                        help='The car with ID ( [car_id] '
+                             ') will be added as a '
+                             'favorite to the user with '
+                             'ID ( [user_id] ).')
+    parser.add_argument('-dc', '--delete_car', type=int, nargs=2, metavar='[car_id] [user_id]',
+                        help='The car with ID ( [car_id] '
+                             ') will be deleted as a '
+                             'favorite to the user with '
+                             'ID ( [user_id] ).')
 
     args = parser.parse_args()
 
@@ -25,6 +35,10 @@ def car_catalog():
         delete_user(args.delete)
     elif args.restore:
         restore_original_data()
+    elif args.add_car:
+        add_car_user(args.add_car)
+    elif args.delete_car:
+        delete_car_user(args.delete_car)
     else:
         return
 
@@ -93,6 +107,14 @@ def restore_original_data():
     shutil.copy(original_users_path, users_path)
     shutil.copy(original_cars_path, cars_path)
     print("Original JSON files have been restored.")
+
+
+def add_car_user(ids):
+    print(ids)
+
+
+def delete_car_user(ids):
+    print(ids)
 
 
 if __name__ == '__main__':
