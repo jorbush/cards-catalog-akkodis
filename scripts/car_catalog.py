@@ -2,8 +2,12 @@ import argparse
 import re
 from termcolor import cprint
 import json
+import shutil
 
-json_user_path = '../src/data/users.json'
+users_path = '../src/data/users.json'
+original_users_path = '../src/data/original/users.json'
+cars_path = '../src/data/cars.json'
+original_cars_path = '../src/data/original/cars.json'
 
 
 def car_catalog():
@@ -11,6 +15,7 @@ def car_catalog():
 
     parser.add_argument('-a', '--add', action='store_true', help='Add a new user')
     parser.add_argument('-d', '--delete', type=str, metavar='ID', help='Delete user with ID')
+    parser.add_argument('-r', '--restore', action='store_true', help='Restore all the data')
 
     args = parser.parse_args()
 
@@ -18,6 +23,8 @@ def car_catalog():
         add_new_user()
     if args.delete:
         delete_user(args.delete)
+    if args.restore:
+        restore_original_data()
 
 
 def add_new_user():
@@ -33,7 +40,7 @@ def add_new_user():
         cprint("Error: Invalid email address format.", "red")
         email = input("Enter the email address: ")
 
-    with open(json_user_path, 'r') as file:
+    with open(users_path, 'r') as file:
         users_data = json.load(file)
         new_id = users_data['usuarios'][-1]['id'] + 1
         new_user = {
@@ -44,7 +51,7 @@ def add_new_user():
         }
         users_data['usuarios'].append(new_user)
 
-        with open(json_user_path, 'w') as write_file:
+        with open(users_path, 'w') as write_file:
             json.dump(users_data, write_file, indent=4)
 
             cprint("New user added successfully!", "green")
@@ -57,7 +64,7 @@ def add_new_user():
 def delete_user(user_id):
     print('Deleting the user with the ID ' + user_id + "...")
 
-    with open(json_user_path, 'r') as file:
+    with open(users_path, 'r') as file:
         users_data = json.load(file)
 
     deleted_user = None
@@ -69,12 +76,18 @@ def delete_user(user_id):
     if deleted_user is not None:
         users_data['usuarios'].remove(deleted_user)
 
-        with open(json_user_path, 'w') as write_file:
+        with open(users_path, 'w') as write_file:
             json.dump(users_data, write_file, indent=4)
 
         cprint("User deleted successfully!", "green")
     else:
         cprint("User with ID " + user_id + " not found.", "red")
+
+
+def restore_original_data():
+    shutil.copy(original_users_path, users_path)
+    shutil.copy(original_cars_path, cars_path)
+    print("Original JSON files has been restored.")
 
 
 if __name__ == '__main__':
